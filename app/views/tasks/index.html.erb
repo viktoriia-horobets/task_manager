@@ -1,11 +1,34 @@
-<h1>Tasks</h1>
-<%= link_to 'New Task', new_task_path %>
-<ul>
+# <h1>Tasks</h1>
+# <%= link_to 'New Task', new_task_path %>
+# <ul>
+#   <% @tasks.each do |task| %>
+#     <li>
+#       <%= link_to task.title, task %>
+#       <%= link_to 'Edit', edit_task_path(task) %>
+#       <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+#     </li>
+#   <% end %>
+# </ul>
+
+<!-- app/views/tasks/index.html.erb -->
+
+<h1 class="page-heading">Tasks</h1>
+
+<%= link_to 'New Task', new_task_path, class: "button" %>
+
+<ul class="task-list">
   <% @tasks.each do |task| %>
-    <li>
-      <%= link_to task.title, task %>
-      <%= link_to 'Edit', edit_task_path(task) %>
-      <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <li class="task-item">
+      <div class="task-details">
+        <h3 class="task-title"><%= link_to task.title, task %></h3>
+        <p class="task-description"><%= task.description %></p>
+        <p class="task-status <%= task.completed ? 'completed' : 'incomplete' %>"><strong>Status:</strong> <%= task.completed ? 'Completed' : 'Incomplete' %></p>
+      </div>
+      <div class="task-actions">
+        <%= link_to 'Edit', edit_task_path(task), class: "button button-primary" %>
+        <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "button button-danger" %>
+      </div>
     </li>
   <% end %>
 </ul>
+
